@@ -46,6 +46,7 @@ void loop() {
     //Move the robot forward until it hits the center
     currentTime = millis();
     while(but2 != 1 && timeStamp() <= 10000 && banana == 1){
+      but2 = robot.readButton(2);
       robot.moveMotor(movingMotorPin, 1, 255);
       //Open at 1 second
       if(timeStamp() >= 2000){
@@ -57,6 +58,7 @@ void loop() {
         robot.digital(clawPneumaticPin,1);
       }
       currentTime = millis();
+      robot.LED(1,1);
     }
     robot.moveMotor(movingMotorPin,1,0);
     robot.digital(solenoidPin,0)
@@ -72,6 +74,7 @@ void loop() {
     //Lift nuke and Sit until 25 second mark
     currentTime = millis();
     while(timeStamp() <= 25000 && banana == 1){
+      robot.LED(2,1);
       //raise for 6 seconds
       if(timeStamp() <= 16000){
         robot.moveMotor(liftMotorPin, 1, 255);
@@ -85,6 +88,7 @@ void loop() {
 
     //Drive backwards to Barbie Land and lower Scissor Lift
     while(timeStamp() <= 38000 && banana == 1){
+      robot.LED(1,0);
       robot.moveMotor(movingMotorPin,2,255);
       robot.moveMotor(liftMotorPin, 2, 100);
     }
@@ -93,7 +97,7 @@ void loop() {
 
 
 
-
+    robot.LED(2,0);
     done = 1;
     shutDown();
     delay(1000000);
